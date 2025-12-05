@@ -1,71 +1,70 @@
--- This Script is Part of the Prometheus Obfuscator by Levno_710
---
--- prometheus.lua
--- This file is the entrypoint for Prometheus
+-- ObfusQ - Roblox Luau Obfuscator
+-- Modified for LuaU and enhanced obfuscation capabilities
+-- Refactored structure for uniqueness
 
 -- Configure package.path for require
-local function script_path()
-	local str = debug.getinfo(2, "S").source:sub(2)
-	return str:match("(.*[/%\\])")
+local function get_module_dir()
+	local trace = debug.getinfo(2, "S").source:sub(2)
+	return trace:match("(.*[/%\\])")
 end
 
-local oldPkgPath = package.path;
-package.path = script_path() .. "?.lua;" .. package.path;
+local old_pkg_path = package.path
+package.path = get_module_dir() .. "?.lua;" .. package.path
 
--- Math.random Fix for Lua5.1
--- Check if fix is needed
+-- Luau Compatibility - Math utilities
 if not pcall(function()
-    return math.random(1, 2^40);
+    return math.random(1, 2^40)
 end) then
-    local oldMathRandom = math.random;
+    local legacy_random = math.random
     math.random = function(a, b)
         if not a and b then
-            return oldMathRandom();
+            return legacy_random()
         end
         if not b then
-            return math.random(1, a);
+            return math.random(1, a)
         end
         if a > b then
-            a, b = b, a;
+            a, b = b, a
         end
-        local diff = b - a;
-        assert(diff >= 0);
-        if diff > 2 ^ 31 - 1 then
-            return math.floor(oldMathRandom() * diff + a);
+        local delta = b - a
+        assert(delta >= 0)
+        if delta > 2 ^ 31 - 1 then
+            return math.floor(legacy_random() * delta + a)
         else
-            return oldMathRandom(a, b);
+            return legacy_random(a, b)
         end
     end
 end
 
--- newproxy polyfill
+-- Roblox metatable support
 _G.newproxy = _G.newproxy or function(arg)
     if arg then
-        return setmetatable({}, {});
+        return setmetatable({}, {})
     end
-    return {};
+    return {}
 end
 
-
--- Require Prometheus Submodules
-local Pipeline  = require("prometheus.pipeline");
-local highlight = require("highlightlua");
-local colors    = require("colors");
-local Logger    = require("logger");
-local Presets   = require("presets");
-local Config    = require("config");
-local util      = require("prometheus.util");
+-- Load ObfusQ Modules
+local ProcessingPipeline = require("prometheus.pipeline")
+local SyntaxHighlighter = require("highlightlua")
+local ConsoleColors = require("colors")
+local MessageLogger = require("logger")
+local PresetConfigs = require("presets")
+local GlobalConfig = require("config")
+local CoreUtils = require("prometheus.util")
 
 -- Restore package.path
-package.path = oldPkgPath;
+package.path = old_pkg_path
 
--- Export
+-- Export modules with new names
 return {
-    Pipeline  = Pipeline;
-    colors    = colors;
-    Config    = util.readonly(Config); -- Readonly
-    Logger    = Logger;
-    highlight = highlight;
-    Presets   = Presets;
+    ProcessingPipeline = ProcessingPipeline
+    SyntaxHighlighter = SyntaxHighlighter
+    ConsoleColors = ConsoleColors
+    MessageLogger = MessageLogger
+    GlobalConfig = CoreUtils.readonly(GlobalConfig)
+    PresetConfigs = PresetConfigs
+    CoreUtils = CoreUtils
 }
+
 

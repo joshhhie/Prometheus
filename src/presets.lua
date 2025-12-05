@@ -1,90 +1,49 @@
--- This Script is Part of the Prometheus Obfuscator by Levno_710
---
--- pipeline.lua
---
--- This Script Provides some configuration presets
+-- ObfusQ - Roblox Luau Obfuscator Presets
+-- Modified for full LuaU compatibility and Roblox environments
 
 return {
     ["Minify"] = {
-        -- The default LuaVersion is Lua51
-        LuaVersion = "Lua51";
-        -- For minifying no VarNamePrefix is applied
+        -- LuaU for Roblox compatibility
+        LuaVersion = "LuaU";
         VarNamePrefix = "";
-        -- Name Generator for Variables
-        NameGenerator = "MangledShuffled";
-        -- No pretty printing
+        NameGenerator = "ConfuseMangled";
         PrettyPrint = false;
-        -- Seed is generated based on current time
         Seed = 0;
-        -- No obfuscation steps
-        Steps = {
-
-        }
+        Steps = {}
     };
-    ["Weak"] = {
-        -- The default LuaVersion is Lua51
-        LuaVersion = "Lua51";
-        -- For minifying no VarNamePrefix is applied
+    ["RobloxLight"] = {
+        -- LuaU for Roblox compatibility
+        LuaVersion = "LuaU";
         VarNamePrefix = "";
-        -- Name Generator for Variables that look like this: IlI1lI1l
-        NameGenerator = "MangledShuffled";
-        -- No pretty printing
+        NameGenerator = "ConfuseMangled";
         PrettyPrint = false;
-        -- Seed is generated based on current time
         Seed = 0;
-        -- Obfuscation steps
         Steps = {
-            {
-                Name = "Vmify";
-                Settings = {
-                    
-                };
-            },
             {
                 Name = "ConstantArray";
                 Settings = {
                     Treshold    = 1;
                     StringsOnly = true;
+                    Shuffle     = true;
                 }
             },
             {
                 Name = "WrapInFunction";
-                Settings = {
-
-                }
+                Settings = {}
             },
         }
     };
-    ["Medium"] = {
-        -- The default LuaVersion is Lua51
-        LuaVersion = "Lua51";
-        -- For minifying no VarNamePrefix is applied
+    ["RobloxMedium"] = {
+        -- LuaU for Roblox compatibility
+        LuaVersion = "LuaU";
         VarNamePrefix = "";
-        -- Name Generator for Variables
-        NameGenerator = "MangledShuffled";
-        -- No pretty printing
+        NameGenerator = "ConfuseMangled";
         PrettyPrint = false;
-        -- Seed is generated based on current time
         Seed = 0;
-        -- Obfuscation steps
         Steps = {
             {
                 Name = "EncryptStrings";
-                Settings = {
-
-                };
-            },
-            {
-                Name = "AntiTamper";
-                Settings = {
-                    UseDebug = false;
-                };
-            },
-            {
-                Name = "Vmify";
-                Settings = {
-                    
-                };
+                Settings = {};
             },
             {
                 Name = "ConstantArray";
@@ -98,77 +57,49 @@ return {
             },
             {
                 Name = "NumbersToExpressions";
-                Settings = {
-
-                }
+                Settings = {}
             },
             {
                 Name = "WrapInFunction";
-                Settings = {
-
-                }
+                Settings = {}
             },
         }
     };
-    ["Strong"] = {
-        -- The default LuaVersion is Lua51
-        LuaVersion = "Lua51";
-        -- For minifying no VarNamePrefix is applied
+    ["RobloxStrong"] = {
+        -- LuaU for Roblox compatibility
+        LuaVersion = "LuaU";
         VarNamePrefix = "";
-        -- Name Generator for Variables that look like this: IlI1lI1l
-        NameGenerator = "MangledShuffled";
-        -- No pretty printing
+        NameGenerator = "ConfuseMangled";
         PrettyPrint = false;
-        -- Seed is generated based on current time
         Seed = 0;
-        -- Obfuscation steps
         Steps = {
             {
-                Name = "Vmify";
-                Settings = {
-                    
-                };
-            },
-            {
                 Name = "EncryptStrings";
-                Settings = {
-
-                };
-            },
-            {
-                Name = "AntiTamper";
-                Settings = {
-
-                };
-            },
-            {
-                Name = "Vmify";
-                Settings = {
-                    
-                };
+                Settings = {};
             },
             {
                 Name = "ConstantArray";
                 Settings = {
-                    Treshold    = 1;
-                    StringsOnly = true;
+                    Treshold    = 2;
+                    StringsOnly = false;
                     Shuffle     = true;
                     Rotate      = true;
-                    LocalWrapperTreshold = 0;
+                    LocalWrapperTreshold = 1;
                 }
+            },
+            {
+                Name = "ProxifyLocals";
+                Settings = {}
             },
             {
                 Name = "NumbersToExpressions";
-                Settings = {
-
-                }
+                Settings = {}
             },
             {
                 Name = "WrapInFunction";
-                Settings = {
-
-                }
+                Settings = {}
             },
         }
     },
 }
+
