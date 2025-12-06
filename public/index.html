@@ -3,70 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ObfusQ - Roblox Luau Obfuscator</title>
-    <link rel="stylesheet" href="/styles.css">
+    <title>Lufuscator | Premium Luau Obfuscation</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>ObfusQ</h1>
-            <p class="subtitle">Roblox Luau Code Obfuscator</p>
+            <h1>Lufuscator</h1>
+            <p class="subtitle">Advanced Roblox Luau Obfuscation. Secure. Fast. Free.</p>
         </header>
-
-        <div class="content">
-            <div class="info-panel">
-                <h2>About ObfusQ</h2>
-                <p>Professional Luau obfuscation for Roblox scripts. Protect your code from reverse engineering with advanced obfuscation techniques.</p>
-                <ul class="features">
-                    <li>✓ Full LuaU/Roblox compatibility</li>
-                    <li>✓ String encryption</li>
-                    <li>✓ Variable name mangling</li>
-                    <li>✓ Control flow transformation</li>
-                    <li>✓ Constant array replacement</li>
-                </ul>
+        
+        <div class="main-content">
+            <div class="editor-container input-section">
+                <div class="editor-header">
+                    <span class="label"><i class="fa-solid fa-code"></i> Input Script</span>
+                </div>
+                <textarea id="inputScript" placeholder="-- Paste your Luau script here...
+print('Hello World')"></textarea>
             </div>
 
-            <div class="editor-section">
-                <div class="input-container">
-                    <label for="scriptInput">Paste your Luau script:</label>
-                    <textarea id="scriptInput" placeholder="-- Paste your Roblox Luau script here..."></textarea>
+            <div class="editor-container output-section">
+                <div class="editor-header">
+                    <span class="label"><i class="fa-solid fa-shield-halved"></i> Obfuscated Output</span>
+                    <button class="copy-btn" id="copyBtn"><i class="fa-regular fa-copy"></i> Copy</button>
                 </div>
-
-                <div class="controls">
-                    <div class="preset-selector">
-                        <label for="presetSelect">Obfuscation Level:</label>
-                        <select id="presetSelect">
-                            <option value="RobloxLight">Light (Fast)</option>
-                            <option value="RobloxMedium" selected>Medium (Balanced)</option>
-                            <option value="RobloxStrong">Strong (Thorough)</option>
-                            <option value="Minify">Minify Only</option>
-                        </select>
-                    </div>
-
-                    <button id="obfuscateBtn" class="btn btn-primary">
-                        <span class="btn-text">Obfuscate Script</span>
-                        <span class="btn-spinner" style="display: none;">⚙️</span>
-                    </button>
-                </div>
-
-                <div class="output-container">
-                    <label for="scriptOutput">Obfuscated output:</label>
-                    <textarea id="scriptOutput" placeholder="Your obfuscated script will appear here..." readonly></textarea>
-                    <button id="copyBtn" class="btn btn-secondary" style="display: none;">
-                        📋 Copy to Clipboard
-                    </button>
-                </div>
-
-                <div id="errorContainer" class="error-message" style="display: none;"></div>
-                <div id="successMessage" class="success-message" style="display: none;"></div>
+                <textarea id="outputScript" readonly placeholder="Obfuscated code will appear here..."></textarea>
             </div>
         </div>
 
-        <footer>
-            <p>&copy; 2024 ObfusQ - Roblox Luau Obfuscator</p>
-        </footer>
+        <div class="actions">
+            <button class="btn" id="obfuscateBtn">
+                <span class="btn-text">Obfuscate Code</span>
+                <span class="loader" id="loader"></span>
+            </button>
+        </div>
     </div>
-
-    <script src="/app.js"></script>
+    
+    <script src="script.js"></script>
 </body>
 </html>
